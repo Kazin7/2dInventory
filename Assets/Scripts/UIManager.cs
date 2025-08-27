@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         if (uiStatus == null) uiStatus = FindObjectOfType<UIStatus>(true);
+        if (uiInventory == null) uiInventory = FindObjectOfType<UIInventory>(true);
         if (uiExpBar == null) uiExpBar = FindObjectOfType<UIExpBar>(true);
     }
 }
