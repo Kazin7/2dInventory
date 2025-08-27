@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,11 +6,20 @@ public class UIMainMenu : MonoBehaviour
 {
     [SerializeField] private Button statusBtn;
     [SerializeField] private Button inventoryBtn;
+    public TMP_Text levelText;
+    public TMP_Text NameText;
     void Start()
     {
         statusBtn.onClick.AddListener(OpenStatus);
         inventoryBtn.onClick.AddListener(OpenInventory);
-        UIManager.Instance.uiExpBar.SetExp(UIManager.Instance.character.Exp, UIManager.Instance.character.MaxExp);
+        SetCharacterInfo(GameManager.Instance.player);
+    }
+    public void SetCharacterInfo(Character c)
+    {
+        if (c == null) return;
+        NameText.text = $"{c.Name}";
+        levelText.text = $"{c.Level}";
+        UIManager.Instance.uiExpBar.SetExp(c.Exp, c.MaxExp);
     }
     void OpenMainMenu()//뭘하는지모르겠음
     {

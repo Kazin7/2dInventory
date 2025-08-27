@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] public UIStatus uiStatus;
     [SerializeField] public UIInventory uiInventory;
     [SerializeField] public UIExpBar uiExpBar;
-    [SerializeField] public Character character;
 
     void Awake()
     {
@@ -20,7 +19,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         if (uiStatus == null) uiStatus = FindObjectOfType<UIStatus>(true);
-        if (character == null) character = FindObjectOfType<Character>(true);
         if (uiExpBar == null) uiExpBar = FindObjectOfType<UIExpBar>(true);
     }
 }

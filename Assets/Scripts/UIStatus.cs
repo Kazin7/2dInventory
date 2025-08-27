@@ -16,13 +16,17 @@ public class UIStatus : MonoBehaviour
             UIManager.Instance.uiStatus = this;
         if (uiStatus == null)
             uiStatus = this.gameObject;
-        attackText.text = UIManager.Instance.character.Attack.ToString();
-        shieldText.text = UIManager.Instance.character.Shield.ToString();
-        healthText.text = UIManager.Instance.character.Health.ToString();
-        criticalText.text = UIManager.Instance.character.Critical.ToString();
+        SetCharacterInfo(GameManager.Instance.player);
         backBtn.onClick.AddListener(OnclickBack);
     }
-
+    public void SetCharacterInfo(Character c)
+    {
+        if (c == null) return;
+        attackText.text   = $"{c.Attack}";
+        shieldText.text   = $"{c.Shield}";
+        healthText.text   = $"{c.Health}";
+        criticalText.text = $"{c.Critical}";
+    }
     public void OnclickBack()
     {
         uiStatus.SetActive(false);
