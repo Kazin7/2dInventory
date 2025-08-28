@@ -17,11 +17,11 @@ public class UITooltip : MonoBehaviour
         Hide();
     }
 
-    public void Show(Item item, Vector2 screenPos)
+    public void Show(ItemData item, Vector2 screenPos)
     {
         if (item == null) { Hide(); return; }
 
-        title.text = string.IsNullOrEmpty(item.id) ? item.type.ToString() : item.id;
+        title.text = string.IsNullOrEmpty(item.name) ? item.type.ToString() : item.name;
 
         System.Text.StringBuilder sb = new();
         if (item.attackBonus != 0) sb.AppendLine($"+ATK {item.attackBonus}");

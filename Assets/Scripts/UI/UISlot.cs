@@ -12,7 +12,7 @@ public class UISlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     Sprite cur;
     Outline outline;
-    Item boundItem;
+    ItemData boundItem;
 
     public bool IsEmpty => cur == null;
     void Awake()
@@ -55,7 +55,7 @@ public class UISlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (button) button.interactable = has;
         if (!has) SetEquipped(false);
     }
-    public void BindItem(Item item)
+    public void BindItem(ItemData item)
     {
         boundItem = item;
     }

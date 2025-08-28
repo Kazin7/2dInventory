@@ -3762,10 +3762,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 970072132}
-  itemIcons:
-  - {fileID: 21300000, guid: 25747d239cf92d744b1c6574f22738ad, type: 3}
-  - {fileID: 21300000, guid: 9d317025329b6da4f95d1de58e943201, type: 3}
-  - {fileID: 21300000, guid: d31bea2df7ad70c4798e943486846e77, type: 3}
+  itemDataList:
+  - {fileID: 11400000, guid: d16c8866012a3864a846a500de2cd44e, type: 2}
+  - {fileID: 11400000, guid: 6f24e8eaaea28c140b58dfc8c2fb7077, type: 2}
+  - {fileID: 11400000, guid: afd64344492732842a52d40beff73a07, type: 2}
 --- !u!4 &1438064669
 Transform:
   m_ObjectHideFlags: 0

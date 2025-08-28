@@ -83,7 +83,7 @@ public class UIInventory : MonoBehaviour
         }
     }
 
-    void OnSlotClicked(Character c, Item item, UISlot slot)
+    void OnSlotClicked(Character c, ItemData item, UISlot slot)
     {
         if (item == null || !item.IsEquippable) return;
 

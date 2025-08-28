@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public Character player;
 
-    [Header("Item Icons (0:sword, 1:shield, 2:armor)")]
-    [SerializeField] List<Sprite> itemIcons;
+    [Header("아이템 데이터 리스트 (ScriptableObject)")]
+    [SerializeField] List<ItemData> itemDataList = new();
 
     void Awake()
     {
@@ -21,22 +21,13 @@ public class GameManager : MonoBehaviour
     public void SetData()
     {
         if (!player) return;
-
         player.SetUp("김영식");
 
-        var sword  = new Item("sword",  GetIcon(0), ItemType.Weapon,     1, attackBonus: 10);
-        var shield = new Item("shield", GetIcon(1), ItemType.Armor,      1, shieldBonus: 8);
-        var potion = new Item("armor",GetIcon(2), ItemType.Armor, 1 , shieldBonus: 20);
-
-        player.AddItem(sword);
-        player.AddItem(shield);
-        player.AddItem(potion);
-    }
-
-    Sprite GetIcon(int index)
-    {
-        if (itemIcons != null && index >= 0 && index < itemIcons.Count)
-            return itemIcons[index];
-        return null;
+        foreach (var data in itemDataList)
+        {
+            if (data != null)
+                player.AddItem(data);
+        }
     }
 }
+

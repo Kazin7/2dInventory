@@ -12,10 +12,10 @@ public class Character : MonoBehaviour
     public int Health { get; private set; } = 100;
     public int Critical { get; private set; } = 25;
 
-    public List<Item> Inventory { get; private set; } = new();
-    Item equippedWeapon;
-    List<Item> equippedArmors = new();
-    Item equippedAccessory;
+    public List<ItemData> Inventory { get; private set; } = new();
+    ItemData equippedWeapon;
+    List<ItemData> equippedArmors = new();
+    ItemData equippedAccessory;
 
     public void SetUp(
         string name = null,
@@ -37,11 +37,11 @@ public class Character : MonoBehaviour
         MaxExp = Level * 3;
     }
 
-    public void AddItem(Item item, int count = 1)
+    public void AddItem(ItemData item, int count = 1)
     {
         if (item == null || count <= 0) return;
 
-        var exist = Inventory.Find(x => x.id == item.id);
+        var exist = Inventory.Find(x => x.name == item.name);
         if (exist != null)
         {
             exist.count += count;
@@ -51,9 +51,9 @@ public class Character : MonoBehaviour
         item.count = Mathf.Max(1, item.count > 0 ? item.count : count);
         Inventory.Add(item);
     }
-    public void Additem(Item item, int count = 1) => AddItem(item, count);
+    public void Additem(ItemData item, int count = 1) => AddItem(item, count);
 
-    public bool Equip(Item item)
+    public bool Equip(ItemData item)
     {
         if (item == null || !item.IsEquippable) return false;
         if (!Inventory.Contains(item)) return false;
@@ -86,7 +86,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public bool UnEquip(Item item)
+    public bool UnEquip(ItemData item)
     {
         if (item == null) return false;
 
@@ -111,7 +111,7 @@ public class Character : MonoBehaviour
         return false;
     }
 
-    void ApplyBonus(Item item, int sign)
+    void ApplyBonus(ItemData item, int sign)
     {
         Attack += sign * item.attackBonus;
         Shield += sign * item.shieldBonus;
@@ -121,7 +121,7 @@ public class Character : MonoBehaviour
         Shield = Mathf.Max(0, Shield);
         Health = Mathf.Max(0, Health);
     }
-    public bool IsEquipped(Item item)
+    public bool IsEquipped(ItemData item)
     {
         if (item == null) return false;
         if (item.type == ItemType.Weapon) return equippedWeapon == item;
