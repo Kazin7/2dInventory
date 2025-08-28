@@ -28,6 +28,7 @@ public class UIMainMenu : MonoBehaviour
     void OpenStatus()
     {
         UIManager.Instance.uiStatus.uiStatus.SetActive(true);
+        UIManager.Instance.uiStatus.SetCharacterInfo(GameManager.Instance.player);
     }
     void OpenInventory()
     {
