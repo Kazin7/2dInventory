@@ -1,28 +1,32 @@
 # uGUI Scroll View + GridLayoutGroup 인벤토리
 
-스크롤 가능한 그리드에 슬롯 동적 생성, 아이템 아이콘 표시, 클릭 시 장착/해제, 장착 시 빨간 테두리(Outline) 표시까지 포함한 인벤토리 UI 템플릿입니다.
+스크롤 가능한 그리드에 슬롯 동적 생성, 아이템 아이콘 표시, 클릭 시 장착/해제, 장착 시 E 표시까지 포함한 인벤토리 UI 템플릿입니다.
 
-- Unity 2021.3+ / uGUI 기반
+- Unity 2022.3.17f / uGUI 기반
 
 ## ✨주요 기능
 - 세로 스크롤 인벤토리 그리드
 - 프리팹을 이용한 슬롯 동적 생성
-- 아이템 데이터 모델: 무기 / 아머(복수 장착) / 액세서리 / 소모품
+- 아이템 데이터 모델: 무기 / 아머(복수 장착) / 액세서리
 - 슬롯 클릭으로 장착/해제 토글
-- 장착 슬롯 빨간 테두리(Outline) 표시
+- 장착 슬롯 E 아이콘 표시
 
 ## 🧩기술 스택
-- Unity 2021.3+
-- uGUI: ScrollRect, GridLayoutGroup, Image, Button, Outline
+- Unity 2022.3.17f
+- uGUI: ScrollRect, GridLayoutGroup, Image, Button, Outline(변경)
 - C# 직렬화, List 컬렉션
 - 
 ## 🧱씬 & 프리팹 세팅
-### 1) UIInventory 패널
-- Canvas 하위에 패널 생성 → 자식으로 Scroll View 추가
-- ScrollRect: Vertical On, Horizontal Off
-- Viewport: RectMask2D 유지
-- Content: GridLayoutGroup 추가 (Constraint: Fixed Column Count, Cell Size/Spacing/Padding 조정)
-
+### 1) UIMainMenu 패널
+-플레이어의 이름, 레벨과 경험치 화면에 표시
+-UIStatus,UIInventory를 활성화하는 방식 사용
+### 2) UIStatus 패널
+-공격력,방어력,체력 표시(아이템 적용시 그 수치도 추가하여 표시)
+### 3) UIInventory 패널
+-12개의 슬롯으로 시작(ItemSlot 12개를 Instantiate)
+-아이템에 마우스 hover시 UITooltip패널 등장(IPointerEnterHandler, IPointerExitHandler사용)
+### 3) UITooltip 패널(프리팹화하여 아이템 hover시 Instantiate하는 방식)
+-Show함수에서 아이템 정보를 출력하도록 텍스트 설정
 ### 2) ItemSlot 프리팹
 - 루트: 배경 Image(SlotImg)
 - 자식: Item(버튼 + 아이콘 이미지)
@@ -30,16 +34,11 @@
   - Icon → 자식 Item의 Image
   - Button → 자식 Item의 Button
   - Border Target → SlotImg(Image)
-- Outline로 빨간 테두리 표시(예: #FF3B30), 시작 시 비활성화
-
-### 3) UIInventory 인스펙터
-- slotPrefab → ItemSlot 프리팹
-- slotParent → Scroll View / Viewport / Content
-- initialCount → 시작 슬롯 수(예: 12)
+- 장착시 E 표시
 
 ## 🔗동작 흐름
 1) 초기화: UIInventory가 슬롯 동적 생성, GameManager/Character가 보유 목록 채움  
-2) 표시: 인벤토리를 읽어 아이콘 배치, 장착 아이템은 빨간 테두리 표시  
+2) 표시: 인벤토리를 읽어 아이콘 배치, 장착 아이템은 E 표시  
 3) 상호작용: 슬롯 클릭 시 장착/해제 토글(아머는 복수 장착)
 
 ## 🧠로직 개요
@@ -48,17 +47,11 @@
 - UISlot: 아이콘 표시/숨김, 버튼 상호작용, 장착 시 BorderTarget Outline 활성화(초기 비활성)
 - UIInventory: 프리팹 동적 생성, 데이터 동기화, 클릭 처리 후 갱신
 
-## ✅인스펙터 체크리스트
-- UIInventory.slotPrefab = ItemSlot.prefab
-- UIInventory.slotParent = Scroll View/Viewport/Content
-- UISlot.Icon = Item 이미지, UISlot.Button = Item 버튼
-- UISlot.BorderTarget = SlotImg(Image)
-- Outline 색상/두께 설정, 시작 시 비활성
-- GridLayoutGroup(Cell Size/Spacing/Constraint) 확인
-- ScrollRect Vertical On / Horizontal Off
+## ✨메인 화면
+<img width="993" height="483" alt="image" src="https://github.com/user-attachments/assets/edd6c652-ca16-4e6a-a76d-df6ca23b3e65" />
 
-## ❓트러블슈팅
-- 아이콘 미표시: UISlot.Icon 연결, 스프라이트 Import 설정 확인
-- 클릭 안 됨: Button 연결, Canvas Graphic Raycaster / EventSystem 확인
-- 테두리 미표시: Outline 존재/색상, BorderTarget가 SlotImg인지 확인
-- 그리드 찌그러짐: Content RectTransform 앵커/피벗, Cell Size/Constraint 점검
+## ✨스테이터스 화면
+<img width="983" height="538" alt="image" src="https://github.com/user-attachments/assets/82a77005-da31-4095-919d-4eb2c0ced008" />
+
+## ✨인벤토리 화면 아이템 장착과 정보 표시
+<img width="987" height="539" alt="image" src="https://github.com/user-attachments/assets/bc483169-1cc3-4142-aa74-b79ebf9783e3" />
