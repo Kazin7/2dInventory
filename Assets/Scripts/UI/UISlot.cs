@@ -62,7 +62,6 @@ public class UISlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData e)
     {
-        Debug.Log("UIManager.Instance.uiTooltip" + UIManager.Instance.uiTooltip);
         if (boundItem != null) UIManager.Instance.uiTooltip?.Show(boundItem, e.position);
     }
 

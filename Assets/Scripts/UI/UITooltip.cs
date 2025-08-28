@@ -4,7 +4,7 @@ using TMPro;
 
 public class UITooltip : MonoBehaviour
 {
-    [SerializeField] RectTransform root;           // self
+    [SerializeField] RectTransform root;
     [SerializeField] TextMeshProUGUI title;
     [SerializeField] TextMeshProUGUI content;
 
