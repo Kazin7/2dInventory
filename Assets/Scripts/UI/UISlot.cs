@@ -5,7 +5,7 @@ public class UISlot : MonoBehaviour
 {
     [SerializeField] Image icon;
     [SerializeField] Button button;
-    [SerializeField] GameObject equippedMark;
+    [SerializeField] RectTransform equipBadge;
 
     [SerializeField] Graphic borderTarget;
 
@@ -18,6 +18,11 @@ public class UISlot : MonoBehaviour
         if (!button) button = GetComponentInChildren<Button>(true) ?? GetComponent<Button>();
         if (!icon)   icon   = transform.Find("Icon")?.GetComponent<Image>() ?? GetComponent<Image>();
         if (!borderTarget) borderTarget = GetComponent<Image>();
+        if (!equipBadge)
+        equipBadge = transform.Find("Item/EquipBadge") as RectTransform
+                  ?? transform.Find("EquipBadge") as RectTransform;
+
+        if (equipBadge) equipBadge.gameObject.SetActive(false);
 
         if (borderTarget)
         {
@@ -57,9 +62,6 @@ public class UISlot : MonoBehaviour
     }
     public void SetEquipped(bool on)
     {
-        if (!outline) return;
-        outline.effectColor = Color.red;
-        outline.effectDistance = new Vector2(3f, -3f);
-        outline.enabled = on;
+        if (equipBadge) equipBadge.gameObject.SetActive(on);
     }
 }
