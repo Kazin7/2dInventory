@@ -21,7 +21,7 @@ public class UITooltip : MonoBehaviour
     {
         if (item == null) { Hide(); return; }
 
-        title.text = string.IsNullOrEmpty(item.name) ? item.type.ToString() : item.name;
+        title.text = string.IsNullOrEmpty(item.itemName) ? item.type.ToString() : item.itemName;
 
         System.Text.StringBuilder sb = new();
         if (item.attackBonus != 0) sb.AppendLine($"+ATK {item.attackBonus}");

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0398ce7ac7bfa0e45a6fc778e2eb4732, type: 3}
   m_Name: Armor
   m_EditorClassIdentifier: 
-  itemName: Armor
+  itemName: "\uAC11\uC637"
   icon: {fileID: 21300000, guid: d31bea2df7ad70c4798e943486846e77, type: 3}
   type: 1
   count: 1

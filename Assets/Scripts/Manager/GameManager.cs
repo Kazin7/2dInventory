@@ -11,13 +11,16 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        //인스턴스 예외처리
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
 
+        //플레이어 정보가 없을경우 찾아옴
         if (!player) player = FindObjectOfType<Character>();
+
         SetData();
     }
-
+    //플레이어정보,아이템정보 설정
     public void SetData()
     {
         if (!player) return;
