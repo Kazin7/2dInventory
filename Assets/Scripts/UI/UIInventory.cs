@@ -20,7 +20,7 @@ public class UIInventory : MonoBehaviour
             uiInventory = this.gameObject;
 
         if (backBtn) backBtn.onClick.AddListener(OnclickBack);
-
+        UIManager.Instance?.MakeTooltip();
         if (!slotParent)
         {
             var sr = GetComponentInChildren<ScrollRect>(true);
@@ -65,6 +65,7 @@ public class UIInventory : MonoBehaviour
                 var slot = slots[i];
 
                 slot.SetItem(item.icon);
+                slot.BindItem(item);
 
                 var btn = slot.GetComponentInChildren<Button>(true);
                 if (btn)

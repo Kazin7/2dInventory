@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class UISlot : MonoBehaviour
+public class UISlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image icon;
     [SerializeField] Button button;
@@ -11,6 +12,7 @@ public class UISlot : MonoBehaviour
 
     Sprite cur;
     Outline outline;
+    Item boundItem;
 
     public bool IsEmpty => cur == null;
     void Awake()
@@ -53,9 +55,25 @@ public class UISlot : MonoBehaviour
         if (button) button.interactable = has;
         if (!has) SetEquipped(false);
     }
+    public void BindItem(Item item)
+    {
+        boundItem = item;
+    }
 
+    public void OnPointerEnter(PointerEventData e)
+    {
+        Debug.Log("UIManager.Instance.uiTooltip" + UIManager.Instance.uiTooltip);
+        if (boundItem != null) UIManager.Instance.uiTooltip?.Show(boundItem, e.position);
+    }
+
+    public void OnPointerExit(PointerEventData e)
+    {
+        UIManager.Instance.uiTooltip?.Hide();
+    }
     public void Clear()
     {
+        boundItem = null;
+        UIManager.Instance.uiTooltip?.Hide();
         cur = null;
         RefreshUI();
         SetEquipped(false);

@@ -1985,6 +1985,9 @@ MonoBehaviour:
   uiStatus: {fileID: 0}
   uiInventory: {fileID: 0}
   uiExpBar: {fileID: 0}
+  uiTooltip: {fileID: 0}
+  tooltipPrefab: {fileID: 7024632011466060306, guid: 8f96939a0e9110748a592ff0a86e20a1, type: 3}
+  tooltipCanvasName: UITooltip
 --- !u!4 &688058116
 Transform:
   m_ObjectHideFlags: 0

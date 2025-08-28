@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum ItemType { Consumable, Weapon, Armor, Accessory, Material }
+public enum ItemType { Weapon, Armor, Accessory}
 
 [System.Serializable]
 public class Item
