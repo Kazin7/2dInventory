@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
     ItemData equippedWeapon;
     List<ItemData> equippedArmors = new();
     ItemData equippedAccessory;
-
+    //플레이어 모든 값들을 설정
     public void SetUp(
         string name = null,
         int? level = null,
@@ -36,7 +36,7 @@ public class Character : MonoBehaviour
 
         MaxExp = Level * 3;
     }
-
+    //아이템을 추가하는 함수
     public void AddItem(ItemData item, int count = 1)
     {
         if (item == null || count <= 0) return;
@@ -51,8 +51,7 @@ public class Character : MonoBehaviour
         item.count = Mathf.Max(1, item.count > 0 ? item.count : count);
         Inventory.Add(item);
     }
-    public void Additem(ItemData item, int count = 1) => AddItem(item, count);
-
+    //아이템 장착 함수 무기,악세서리 1개만 장착 가능 방어구는 여러개
     public bool Equip(ItemData item)
     {
         if (item == null || !item.IsEquippable) return false;
@@ -85,7 +84,7 @@ public class Character : MonoBehaviour
                 return false;
         }
     }
-
+    //아이템 해제 함수
     public bool UnEquip(ItemData item)
     {
         if (item == null) return false;
@@ -110,7 +109,7 @@ public class Character : MonoBehaviour
         }
         return false;
     }
-
+    //아이템 보너스 스탯 처리하는 함수 sign이 +1이면 장착 -1이면 해제 설정
     void ApplyBonus(ItemData item, int sign)
     {
         Attack += sign * item.attackBonus;
@@ -121,6 +120,7 @@ public class Character : MonoBehaviour
         Shield = Mathf.Max(0, Shield);
         Health = Mathf.Max(0, Health);
     }
+    //장비를 이미 장착하고있는지 확인하는 함수
     public bool IsEquipped(ItemData item)
     {
         if (item == null) return false;

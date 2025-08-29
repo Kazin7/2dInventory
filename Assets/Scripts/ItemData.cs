@@ -3,6 +3,7 @@ using UnityEngine;
 public enum ItemType { Weapon, Armor, Accessory }
 
 [CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
+//SriptableObject아이템 정보
 public class ItemData : ScriptableObject
 {
     [Header("기본 정보")]
@@ -15,7 +16,6 @@ public class ItemData : ScriptableObject
     public int attackBonus;
     public int shieldBonus;
     public int healthBonus;
-
-    public bool IsEmpty => (icon == null && string.IsNullOrEmpty(itemName)) || count <= 0;
+    
     public bool IsEquippable => type == ItemType.Weapon || type == ItemType.Armor || type == ItemType.Accessory;
 }

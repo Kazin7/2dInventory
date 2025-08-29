@@ -11,12 +11,12 @@ public class UISlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] Graphic borderTarget;
 
     Sprite cur;
-    Outline outline;
     ItemData boundItem;
 
     public bool IsEmpty => cur == null;
     void Awake()
     {
+        //인스펙터로 연결안되어있을경우 찾아서 넣음
         if (!button) button = GetComponentInChildren<Button>(true) ?? GetComponent<Button>();
         if (!icon)   icon   = transform.Find("Icon")?.GetComponent<Image>() ?? GetComponent<Image>();
         if (!borderTarget) borderTarget = GetComponent<Image>();
@@ -24,25 +24,15 @@ public class UISlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         equipBadge = transform.Find("Item/EquipBadge") as RectTransform
                   ?? transform.Find("EquipBadge") as RectTransform;
 
+        //기본적으로는 장착안되어있음
         if (equipBadge) equipBadge.gameObject.SetActive(false);
-
-        if (borderTarget)
-        {
-            outline = borderTarget.GetComponent<Outline>();
-            if (!outline) outline = borderTarget.gameObject.AddComponent<Outline>();
-
-            outline.effectColor = Color.red;
-            outline.effectDistance = new Vector2(5f, -5f);
-
-            outline.enabled = false;
-        }
     }
     public void SetItem(Sprite s)
     {
         cur = s;
         RefreshUI();
     }
-
+    //UI갱신하는 함수    
     public void RefreshUI()
     {
         bool has = cur != null;
@@ -55,11 +45,12 @@ public class UISlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (button) button.interactable = has;
         if (!has) SetEquipped(false);
     }
+    //아이콘과 실제 데이터를 연결
     public void BindItem(ItemData item)
     {
         boundItem = item;
     }
-
+    //마우스 포인터에따른 동작 정의
     public void OnPointerEnter(PointerEventData e)
     {
         if (boundItem != null) UIManager.Instance.uiTooltip?.Show(boundItem, e.position);
@@ -69,6 +60,7 @@ public class UISlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         UIManager.Instance.uiTooltip?.Hide();
     }
+    //초기화 함수
     public void Clear()
     {
         boundItem = null;
@@ -77,6 +69,7 @@ public class UISlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         RefreshUI();
         SetEquipped(false);
     }
+    //장착 표시용
     public void SetEquipped(bool on)
     {
         if (equipBadge) equipBadge.gameObject.SetActive(on);
